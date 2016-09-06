@@ -1,7 +1,7 @@
 /**
  * HelloClass.java 1.0 Aug 21, 2016
  *
- * Copyright (c) 2016 David J. Powell. All Rights Reserved
+ * Copyright (c) 2016 Jacob Wells and Mitch Thompson. All Rights Reserved
  */
 package edu.elon.contact;
 
@@ -12,11 +12,9 @@ package edu.elon.contact;
  * a key skill for working in teams so we will learn the leading code
  * control system.
  *
-<<<<<<< HEAD
+
  * @author mthompson31
-=======
- * @author Jacob Wells
->>>>>>> 5accaca31f4288943dd99897114c95242efb91b2
+ * @author jwells8
  * @version 1.0
  *
  */
