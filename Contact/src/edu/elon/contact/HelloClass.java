@@ -12,7 +12,7 @@ package edu.elon.contact;
  * a key skill for working in teams so we will learn the leading code
  * control system.
  *
- * @author dpowell2
+ * @author Jacob Wells
  * @version 1.0
  *
  */
@@ -25,5 +25,6 @@ public class HelloClass {
    */
   public static void main(String[] args) {
     System.out.println("Welcome to the Fall Semester");
+    System.out.println("The ETS is on October 20 at 4:15pm in Duke 302");
   }
 }
