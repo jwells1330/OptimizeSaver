@@ -79,23 +79,24 @@ public class SQLDatabaseConnector {
 
   }
 
-  public static void deleteContact(Connection conn) throws SQLException {
+  public static void deleteContact(Connection conn, Contact contact) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-    String deleteFirstName = "Jacob";
-    String deleteLastName = "Wells";
+    String deleteFirstName = contact.getFirstName();
+    String deleteLastName = contact.getLastName();
 
     stmt.executeUpdate(
         "DELETE FROM contact " + "WHERE firstName = '" + deleteFirstName + "' AND lastName = '" + deleteLastName + "'");
   }
 
-  public static void updateContact(Connection conn) throws SQLException {
+  public static void updateContact(Connection conn, Contact contact) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-    String deleteFirstName = "Jacob";
-    String deleteLastName = "Wells";
+    String deleteFirstName = contact.getFirstName();
+    String deleteLastName = contact.getLastName();
+
 
     stmt.executeUpdate("UPDATE contact " + "SET" + "WHERE firstName = '" + deleteFirstName + "' AND lastName = '"
         + deleteLastName + "'");

@@ -1,6 +1,5 @@
 package edu.elon.contact;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ContactApplication {
@@ -13,7 +12,7 @@ public class ContactApplication {
 
   private static void createDB() throws SQLException {
     //SQLDatabaseConnector myDatabaseConnector = new SQLDatabaseConnector();
-    Connection conn = SQLDatabaseConnector.connectToDatabase();
+    SQLDatabaseConnector.connectToDatabase();
   }
 
   private static void createUI() {
