@@ -15,7 +15,7 @@ public class SQLDatabaseConnector {
 
   private static final Scanner in = new Scanner(System.in);
 
-  public void SQLDatabaseConnector() throws SQLException {
+  public SQLDatabaseConnector() throws SQLException {
   }
 
   public static Connection connectToDatabase() throws SQLException {
@@ -27,7 +27,7 @@ public class SQLDatabaseConnector {
       System.out.println("Succesfully Connected to Database!");
     } catch (SQLException e) {
       // System.err.println(e);
-      System.out.println("Connection Failed: Incorrect db paramaters");
+      System.out.println("Connection Failed: Incorrect db parameters");
     }
     return conn;
   }
@@ -62,18 +62,18 @@ public class SQLDatabaseConnector {
     stmt.close();
   }
 
-  public static void createNewContact(Connection conn) throws SQLException {
+  public static void createNewContact(Connection conn, Contact contact) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
     String newFirstName = "Jacob ";
-    String newMiddleName = "Michael ";
+    String newMiddleName = "Michael";
     String newLastName = "Wells ";
     String newEmail = "jwells8@elon.edu ";
     String newMajor = "CS ";
 
-    stmt.executeUpdate("INSERT INTO contact" + "(FirstName,MiddleName,LastName,Email,Major) " + "Values" + "('"
-        + newFirstName + "', '" + newMiddleName + "', '" + newLastName + "', '" + newEmail + "', '" + newMajor + "')");
+    stmt.executeUpdate("INSERT INTO contact" + "(FirstName,MiddleName,LastName,Email,Major) " + "Values" + "( " + contact.toString()
+    + " )");
 
     stmt.close();
 
@@ -104,7 +104,6 @@ public class SQLDatabaseConnector {
   public static void deleteAllContacts(Connection conn) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
     stmt.executeUpdate("DELETE FROM contact");
   }
 

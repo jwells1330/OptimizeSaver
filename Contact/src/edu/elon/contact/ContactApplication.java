@@ -12,8 +12,8 @@ public class ContactApplication {
   }
 
   private static void createDB() throws SQLException {
-    SQLDatabaseConnector myDatabaseConnector = new SQLDatabaseConnector();
-    Connection conn = myDatabaseConnector.connectToDatabase();
+    //SQLDatabaseConnector myDatabaseConnector = new SQLDatabaseConnector();
+    Connection conn = SQLDatabaseConnector.connectToDatabase();
   }
 
   private static void createUI() {
