@@ -1,19 +1,20 @@
 package edu.elon.contact;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 
 public class ContactUI {
 
   private JFrame frame;
   private JPanel labelPanel;
-  private JPanel textBoxPanel;
-  private JPanel buttonsPanel;
-  private JButton nextButton;
-  private JButton previousButton;
+  private JPanel panel;
+  private JPanel buttonPanel;
+  private JButton button;
   private JMenuBar menuBar;
-  private JMenu file;
-  private JMenu edit;
+  private JMenu menu;
+  private JMenuItem menuItem;
   
 
   public ContactUI() {
@@ -56,8 +57,8 @@ public class ContactUI {
   }
 
   public void createTextBoxes() {
-    textBoxPanel = new JPanel();
-    textBoxPanel.setLayout(new GridLayout(5, 1));
+    panel = new JPanel();
+    panel.setLayout(new GridLayout(5, 1));
 
     JTextField firstNameBox = new JTextField();
     JTextField middleNameBox = new JTextField();
@@ -65,35 +66,90 @@ public class ContactUI {
     JTextField emailBox = new JTextField();
     JTextField majorBox = new JTextField();
 
-    textBoxPanel.add(firstNameBox);
-    textBoxPanel.add(middleNameBox);
-    textBoxPanel.add(lastNameBox);
-    textBoxPanel.add(emailBox);
-    textBoxPanel.add(majorBox);
+    panel.add(firstNameBox);
+    panel.add(middleNameBox);
+    panel.add(lastNameBox);
+    panel.add(emailBox);
+    panel.add(majorBox);
     
-    frame.add(textBoxPanel, BorderLayout.CENTER);
+    frame.add(panel, BorderLayout.CENTER);
   }
 
   public void createButtons(){
-    buttonsPanel = new JPanel();
-    nextButton = new JButton("Next");
-    previousButton = new JButton("Previous");
+    buttonPanel = new JPanel();
     
-    buttonsPanel.add(previousButton, BorderLayout.LINE_START);
-    buttonsPanel.add(nextButton, BorderLayout.LINE_END);
+    button = new JButton("Next");
+    buttonPanel.add(button, BorderLayout.LINE_END);
     
-    frame.add(buttonsPanel, BorderLayout.PAGE_END);
+    button = new JButton("Previous");
+    buttonPanel.add(button, BorderLayout.LINE_START);
+    
+    frame.add(buttonPanel, BorderLayout.PAGE_END);
   }
   
   public void createMenu(){
     menuBar = new JMenuBar();
-    file = new JMenu("File");
-    edit = new JMenu("Edit");
     
-    menuBar.add(file, BorderLayout.WEST);
-    menuBar.add(edit, BorderLayout.CENTER);
+    menu = new JMenu("File");
+    menu.setMnemonic(KeyEvent.VK_F);
+    
+    menuItem = new JMenuItem("Clear DB", KeyEvent.VK_C);
+    menuItem.setEnabled(false);
+    menu.add(menuItem);
+    menuItem = new JMenuItem("Connect", KeyEvent.VK_T);
+    menuItem.addActionListener(new UIActionListener());
+    menu.add(menuItem);
+    menu.addSeparator();
+    menuItem = new JMenuItem("Exit", KeyEvent.VK_X);
+    menu.add(menuItem);
+    
+    menuBar.add(menu, BorderLayout.WEST);
+    
+    
+    
+    menu = new JMenu("Edit");
+    menu.setMnemonic(KeyEvent.VK_E);
+    
+    menuItem = new JMenuItem("Add", KeyEvent.VK_A);
+    menuItem.setEnabled(false);
+    menu.add(menuItem);
+    menuItem = new JMenuItem("Remove", KeyEvent.VK_R);
+    menuItem.setEnabled(false);
+    menu.add(menuItem);
+    menuItem = new JMenuItem("Update", KeyEvent.VK_U);
+    menuItem.setEnabled(false);
+    menu.add(menuItem);
+    
+    menuBar.add(menu, BorderLayout.CENTER);
+    
+    
     
     frame.add(menuBar, BorderLayout.PAGE_START);
+  }
+  
+  public void connectToDB(){
+    labelPanel.removeAll();
+//    labelPanel = new JPanel();
+//    labelPanel.setLayout(new GridLayout(5, 1));
+
+    JLabel userName = new JLabel("User Name");
+    JLabel Password = new JLabel("Password");
+    JLabel IP = new JLabel("IP Address");
+    JLabel DBName = new JLabel("Database Name");
+    JLabel tableName = new JLabel("Table Name");
+
+    labelPanel.add(userName);
+    labelPanel.add(Password);
+    labelPanel.add(IP);
+    labelPanel.add(DBName);
+    labelPanel.add(tableName);
+    
+    frame.add(labelPanel, BorderLayout.LINE_START);
+    
+    button = new JButton("OK");
+    buttonPanel.removeAll();
+    buttonPanel.add(button);
+
   }
   public void displayUI() {
     frame.setVisible(true);

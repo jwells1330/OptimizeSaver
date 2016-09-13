@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ContactApplication {
+  public static ContactUI myUI;
+  
   public static void main(String[] args) throws SQLException {
     createUI();
     createDB();
@@ -15,7 +17,7 @@ public class ContactApplication {
   }
 
   private static void createUI() {
-    ContactUI myUI = new ContactUI();
+    myUI = new ContactUI();
     myUI.createUI();
     myUI.displayUI();
   }
