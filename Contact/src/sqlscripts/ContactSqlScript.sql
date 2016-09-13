@@ -19,5 +19,3 @@ VALUES ('Marshall','C','Brown','mbrown62@elon.edu','Computer Science'),
 ('Maddie','C','Chili','mchili@elon.edu','Computer Science'),
 ('Keith','A','Davis','kdavis36@elon.edu','Computer Science'),
 ('Zareh','H','Deirmendjian','zdeirmendjian@elon.edu','Computer Science'); 
-
-SELECT * FROM contact;
