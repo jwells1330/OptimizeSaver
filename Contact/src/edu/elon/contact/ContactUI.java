@@ -168,6 +168,9 @@ public class ContactUI {
     buttonPanel.add(button);
 
   }
+  public void unableToConnectUI(){
+    JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert", JOptionPane.ERROR_MESSAGE);
+  }
   public void displayUI() {
     frame.setVisible(true);
   }

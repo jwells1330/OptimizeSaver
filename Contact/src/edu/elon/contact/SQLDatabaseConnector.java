@@ -23,13 +23,8 @@ public class SQLDatabaseConnector {
     
     Connection conn = null;
 
-    try {
       conn = DriverManager.getConnection(connString, userName, passWord);
-      System.out.println("Succesfully Connected to Database!");
-    } catch (SQLException e) {
-      // System.err.println(e);
-      System.out.println("Connection Failed: Incorrect db parameters");
-    }
+//      System.out.println("Succesfully Connected to Database!");
     return conn;
   }
 
