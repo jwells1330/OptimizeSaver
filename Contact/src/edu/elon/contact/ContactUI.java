@@ -39,7 +39,7 @@ public class ContactUI {
   public void createFrame() {
     frame = new JFrame("Contact Display View");
     frame.setSize(400, 200);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.getContentPane().setBackground(Color.LIGHT_GRAY);
   }
 
@@ -100,6 +100,7 @@ public class ContactUI {
     menu.setMnemonic(KeyEvent.VK_F);
     
     menuItem = new JMenuItem("Clear DB", KeyEvent.VK_C);
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     menuItem = new JMenuItem("Connect", KeyEvent.VK_T);
@@ -107,6 +108,7 @@ public class ContactUI {
     menu.add(menuItem);
     menu.addSeparator();
     menuItem = new JMenuItem("Exit", KeyEvent.VK_X);
+    menuItem.addActionListener(new UIActionListener());
     menu.add(menuItem);
     
     menuBar.add(menu, BorderLayout.WEST);
@@ -170,6 +172,9 @@ public class ContactUI {
   }
   public void unableToConnectUI(){
     JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert", JOptionPane.ERROR_MESSAGE);
+  }
+  public void close(){
+    frame.dispose();
   }
   public void displayUI() {
     frame.setVisible(true);
