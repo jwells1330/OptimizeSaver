@@ -134,15 +134,15 @@ public class ContactUI {
     menu.setMnemonic(KeyEvent.VK_F);
     
     menuItem = new JMenuItem("Clear DB", KeyEvent.VK_C);
-//    menuItem.addActionListener(new UIActionListener());
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     menuItem = new JMenuItem("Connect", KeyEvent.VK_T);
-//    menuItem.addActionListener(new UIActionListener());
+    menuItem.addActionListener(new UIActionListener());
     menu.add(menuItem);
     menu.addSeparator();
     menuItem = new JMenuItem("Exit", KeyEvent.VK_X);
-//    menuItem.addActionListener(new UIActionListener());
+    menuItem.addActionListener(new UIActionListener());
     menu.add(menuItem);
     
     menuBar.add(menu, BorderLayout.WEST);
@@ -170,5 +170,8 @@ public class ContactUI {
   }
   public void displayUI() {
     mainFrame.setVisible(true);
+  }
+  public void closeUI(){
+    mainFrame.dispose();
   }
 }
