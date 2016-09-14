@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -121,6 +122,7 @@ public class ContactUI {
       buttonPanel.add(button, BorderLayout.LINE_START);
     }else if(type ==2 ){
       button = new JButton("OK");
+      menuItem.addActionListener(new UIActionListener());
       buttonPanel.add(button);
     }
 
@@ -153,23 +155,38 @@ public class ContactUI {
     menu.setMnemonic(KeyEvent.VK_E);
     
     menuItem = new JMenuItem("Add", KeyEvent.VK_A);
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     menuItem = new JMenuItem("Remove", KeyEvent.VK_R);
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     menuItem = new JMenuItem("Update", KeyEvent.VK_U);
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     
     menuBar.add(menu, BorderLayout.CENTER);
     
-    
-    
     mainFrame.add(menuBar, BorderLayout.PAGE_START);
+    
+    
   }
+  public Contact grabInputAsContact(){
+    Contact c = new Contact();
+    c.setFirstName(firstBox.getText());
+    c.setMiddleName(secondBox.getText());
+    c.setLastName(thirdBox.getText());
+    c.setEmail(fourthBox.getText());
+    c.setMajor(fifthBox.getText());
+    return c;
+}
   public void displayUI() {
     mainFrame.setVisible(true);
+  }
+  public void connectionToDBFailed(){
+    JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert", JOptionPane.ERROR_MESSAGE);
   }
   public void closeUI(){
     mainFrame.dispose();
