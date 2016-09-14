@@ -60,7 +60,7 @@ public class ContactUI {
       thirdLabel.setText("Last Name");
       fourthLabel.setText("Email");
       fifthLabel.setText("Major");
-    } else {
+    } else if (type == 2) {
       firstLabel.setText("Username");
       secondLabel.setText("Password");
       thirdLabel.setText("IP Address");
@@ -119,13 +119,14 @@ public class ContactUI {
       
       button = new JButton("Previous");
       buttonPanel.add(button, BorderLayout.LINE_START);
-    }else{
+    }else if(type ==2 ){
       button = new JButton("OK");
       buttonPanel.add(button);
     }
 
     mainFrame.add(buttonPanel, BorderLayout.PAGE_END);
   }
+  
 
   public void createMenu(){
     menuBar = new JMenuBar();
@@ -146,7 +147,6 @@ public class ContactUI {
     menu.add(menuItem);
     
     menuBar.add(menu, BorderLayout.WEST);
-    
     
     
     menu = new JMenu("Edit");
