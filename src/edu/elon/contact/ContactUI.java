@@ -153,21 +153,33 @@ public class ContactUI {
     menu.setMnemonic(KeyEvent.VK_E);
     
     menuItem = new JMenuItem("Add", KeyEvent.VK_A);
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     menuItem = new JMenuItem("Remove", KeyEvent.VK_R);
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     menuItem = new JMenuItem("Update", KeyEvent.VK_U);
+    menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(false);
     menu.add(menuItem);
     
     menuBar.add(menu, BorderLayout.CENTER);
     
-    
-    
     mainFrame.add(menuBar, BorderLayout.PAGE_START);
+    
+    
   }
+  public Contact grabInputAsContact(){
+    Contact c = new Contact();
+    c.setFirstName(firstBox.getText());
+    c.setMiddleName(secondBox.getText());
+    c.setLastName(thirdBox.getText());
+    c.setEmail(fourthBox.getText());
+    c.setMajor(fifthBox.getText());
+    return c;
+}
   public void displayUI() {
     mainFrame.setVisible(true);
   }
