@@ -20,7 +20,7 @@ public class SQLDatabaseConnector {
   }
 
   public static Connection connectToDatabase(String connString, String userName, String passWord) throws SQLException {
-
+    
     Connection conn = null;
 
     try {

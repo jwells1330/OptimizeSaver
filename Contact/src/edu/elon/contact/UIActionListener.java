@@ -21,8 +21,9 @@ public class UIActionListener implements ActionListener {
     	
     	//not sure if I am on the right track here, but seems so
     	try {
-    		//order of connstring, username, password boxes
-			SQLDatabaseConnector.connectToDatabase(myUI.lastNameBox.getText(),myUI.firstNameBox.getText(),myUI.middleNameBox.getText());
+    	  System.out.println("Connecting to Database");
+    	  String connString = "jdbc:mysql://" + myUI.lastNameBox.getText() + "/" + myUI.emailBox.getText();
+			SQLDatabaseConnector.connectToDatabase(connString, myUI.firstNameBox.getText(), myUI.middleNameBox.getText());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

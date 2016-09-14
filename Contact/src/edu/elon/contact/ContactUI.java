@@ -163,6 +163,7 @@ public class ContactUI {
     frame.add(labelPanel, BorderLayout.LINE_START);
     
     button = new JButton("OK");
+    button.addActionListener(new UIActionListener());
     buttonPanel.removeAll();
     buttonPanel.add(button);
 
