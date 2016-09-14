@@ -15,15 +15,16 @@ public class SQLDatabaseConnector {
 
   private static final Scanner in = new Scanner(System.in);
 
+
   public SQLDatabaseConnector() throws SQLException {
   }
 
-  public static Connection connectToDatabase() throws SQLException {
+  public static Connection connectToDatabase(String connString, String userName, String passWord) throws SQLException {
 
     Connection conn = null;
 
     try {
-      conn = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+      conn = DriverManager.getConnection(connString, userName, passWord);
       System.out.println("Succesfully Connected to Database!");
     } catch (SQLException e) {
       // System.err.println(e);
@@ -66,11 +67,6 @@ public class SQLDatabaseConnector {
     Statement stmt = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-    String newFirstName = "Jacob ";
-    String newMiddleName = "Michael";
-    String newLastName = "Wells ";
-    String newEmail = "jwells8@elon.edu ";
-    String newMajor = "CS ";
 
     stmt.executeUpdate("INSERT INTO contact" + "(FirstName,MiddleName,LastName,Email,Major) " + "Values" + "( " + contact.toString()
     + " )");
@@ -111,7 +107,7 @@ public class SQLDatabaseConnector {
   public static Contact grabFirstContact(Connection conn) throws SQLException {
 	  Statement stmt = null;
 	  stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-	  //implement code to get details of first entry as type Contact
+	  //implement code to get details of first entry as type Contact. Call this in UI on button click to fill text fields.
 	  return null;
   }
 

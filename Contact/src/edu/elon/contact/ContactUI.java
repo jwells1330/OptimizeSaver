@@ -16,11 +16,11 @@ public class ContactUI {
   private JMenuBar menuBar;
   private JMenu menu;
   private JMenuItem menuItem;
-  private JTextField firstNameBox;
-  private JTextField middleNameBox;
-  private JTextField lastNameBox;
-  private JTextField emailBox;
-  private JTextField majorBox;
+  protected JTextField firstNameBox;
+  protected JTextField middleNameBox;
+  protected JTextField lastNameBox;
+  protected JTextField emailBox;
+  protected JTextField majorBox;
   
 
   public ContactUI() {

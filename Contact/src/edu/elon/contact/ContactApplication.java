@@ -12,7 +12,7 @@ public class ContactApplication {
 
   private static void createDB() throws SQLException {
     //SQLDatabaseConnector myDatabaseConnector = new SQLDatabaseConnector();
-    SQLDatabaseConnector.connectToDatabase();
+    //SQLDatabaseConnector.connectToDatabase();
   }
 
   private static void createUI() {
