@@ -1,6 +1,7 @@
 package edu.elon.contact;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,10 +14,39 @@ public class SQLDatabaseConnector {
   public static String defaultDB = "contactBook";
   public static String defaultTable = "contact";
 
+  public static ContactUI myUI = ContactApplication.myUI;
+      
   public SQLDatabaseConnector() {
 
   }
+  
+  public static Connection connectToDatabase(String connString, String userName, String passWord) throws SQLException {
 
+    Connection conn = null;
+
+    conn = DriverManager.getConnection(connString, userName, passWord);
+    return conn;
+  }
+  
+  public static void displayAllContacts(Connection conn) throws SQLException {
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    rs = stmt.executeQuery("SELECT * FROM contact");
+    rs.next();
+
+    myUI.firstBox.setText(rs.getString(2));
+    myUI.secondBox.setText(rs.getString(3));
+    myUI.thirdBox.setText(rs.getString(4));
+    myUI.fourthBox.setText(rs.getString(5));
+    myUI.fifthBox.setText(rs.getString(6));
+    
+    rs.close();
+    stmt.close();
+
+  }
+  
   public static void deleteAllContacts(Connection conn) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement();

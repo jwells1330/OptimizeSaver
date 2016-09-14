@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -121,6 +122,7 @@ public class ContactUI {
       buttonPanel.add(button, BorderLayout.LINE_START);
     }else{
       button = new JButton("OK");
+      menuItem.addActionListener(new UIActionListener());
       buttonPanel.add(button);
     }
 
@@ -182,6 +184,9 @@ public class ContactUI {
 }
   public void displayUI() {
     mainFrame.setVisible(true);
+  }
+  public void connectionToDBFailed(){
+    JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert", JOptionPane.ERROR_MESSAGE);
   }
   public void closeUI(){
     mainFrame.dispose();

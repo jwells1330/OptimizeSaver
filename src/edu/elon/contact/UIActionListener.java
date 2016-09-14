@@ -38,6 +38,15 @@ public class UIActionListener implements ActionListener{
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
+    }else if(e.getActionCommand().equals("OK")){
+      System.out.println("Connecting to Database");
+      String connString = "jdbc:mysql://" + myUI.thirdBox.getText() + "/" + myUI.fourthBox.getText();
+      try {
+        conn = SQLDatabaseConnector.connectToDatabase(connString, myUI.firstBox.getText(), myUI.secondBox.getText());
+        SQLDatabaseConnector.displayAllContacts(conn);
+      } catch (SQLException e1) {
+        myUI.connectionToDBFailed();
+      }
     }
     
     
