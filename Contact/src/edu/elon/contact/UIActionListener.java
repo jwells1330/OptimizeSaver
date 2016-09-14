@@ -12,6 +12,8 @@ public class UIActionListener implements ActionListener {
       ContactUI myUI = ContactApplication.myUI;
       myUI.connectToDB();
       myUI.displayUI();
+    }else if(e.getActionCommand().equals("OK")){
+    	
     }
     
   }

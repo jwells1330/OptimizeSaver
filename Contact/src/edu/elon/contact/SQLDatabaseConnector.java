@@ -107,6 +107,13 @@ public class SQLDatabaseConnector {
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     stmt.executeUpdate("DELETE FROM contact");
   }
+  
+  public static Contact grabFirstContact(Connection conn) throws SQLException {
+	  Statement stmt = null;
+	  stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+	  //implement code to get details of first entry as type Contact
+	  return null;
+  }
 
   public static void closeConnection(Connection conn) throws SQLException {
     conn.close();

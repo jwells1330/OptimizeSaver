@@ -16,6 +16,11 @@ public class ContactUI {
   private JMenuBar menuBar;
   private JMenu menu;
   private JMenuItem menuItem;
+  private JTextField firstNameBox;
+  private JTextField middleNameBox;
+  private JTextField lastNameBox;
+  private JTextField emailBox;
+  private JTextField majorBox;
   
 
   public ContactUI() {
@@ -61,11 +66,11 @@ public class ContactUI {
     panel = new JPanel();
     panel.setLayout(new GridLayout(5, 1));
 
-    JTextField firstNameBox = new JTextField();
-    JTextField middleNameBox = new JTextField();
-    JTextField lastNameBox = new JTextField();
-    JTextField emailBox = new JTextField();
-    JTextField majorBox = new JTextField();
+    firstNameBox = new JTextField();
+    middleNameBox = new JTextField();
+    lastNameBox = new JTextField();
+    emailBox = new JTextField();
+    majorBox = new JTextField();
 
     panel.add(firstNameBox);
     panel.add(middleNameBox);
@@ -126,6 +131,16 @@ public class ContactUI {
     
     
     frame.add(menuBar, BorderLayout.PAGE_START);
+  }
+  
+  public Contact grabInputAsContact(){
+	  Contact c = new Contact();
+	  c.setFirstName(firstNameBox.getText());
+	  c.setMiddleName(middleNameBox.getText());
+	  c.setLastName(lastNameBox.getText());
+	  c.setEmail(emailBox.getText());
+	  c.setMajor(majorBox.getText());
+	  return c;
   }
   
   public void connectToDB(){
