@@ -3,7 +3,9 @@ package edu.elon.contact;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 import org.junit.After;
@@ -79,20 +81,32 @@ public class DBTest {
 	@Test
 	public void testAddContact() throws SQLException {
 		SQLDatabaseConnector.createNewContact(conn, contact);
-		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
+		 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		 ResultSet rs = stmt.executeQuery("SELECT * FROM contact WHERE FirstName = 'Mitchell'");
+		 rs.next();
+		 String email = rs.getString(5);
+		 assertEquals(email, "mthompson31@elon.edu");
 	}
 	
+	@Test
 	public void testUpdateContact() throws SQLException {
 		contact.setMajor("Chemistry");
 		SQLDatabaseConnector.updateContact(conn, contact);
+		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		 ResultSet rs = stmt.executeQuery("SELECT * FROM contact WHERE FirstName = 'Mitchell'");
+		 rs.next();
+		 String major = rs.getString(6);
+		 assertEquals(major, "Chemistry");
 		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
 	}
 	
+	@Test
 	public void testRemoveContact() throws SQLException {
 		SQLDatabaseConnector.deleteContact(conn, contact);
 		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
 	}
 	
+	@Test
 	public void testDeleteAllContacts() throws SQLException{
 		SQLDatabaseConnector.deleteAllContacts(conn);
 		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
