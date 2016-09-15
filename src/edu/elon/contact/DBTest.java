@@ -53,7 +53,7 @@ public class DBTest {
 		try {
 			conn = SQLDatabaseConnector.connectToDatabase(connString, userName, passWord);
 		} catch (SQLException e) {
-			System.out.println("SQL Error!");
+			System.out.println("Wrong DB Params!");
 			e.printStackTrace();
 		}
 	}
@@ -109,7 +109,10 @@ public class DBTest {
 	@Test
 	public void testDeleteAllContacts() throws SQLException{
 		SQLDatabaseConnector.deleteAllContacts(conn);
-		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
+		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		ResultSet rs = stmt.executeQuery("SElECT * FROM contact");
+		rs.last();
+		assertEquals(rs.getRow(), 0);
 	}
 
 }
