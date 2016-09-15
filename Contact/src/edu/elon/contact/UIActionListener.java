@@ -5,50 +5,120 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/*
+ * Copyright (c) 2016 Jake Wells and Mitch Thompson
+ * 
+ * UIActionListener Class holds all actionListeners connected to contactUI
+ */
 public class UIActionListener implements ActionListener {
 
   private ContactUI myUI = ContactApplication.myUI;
-  private Connection conn;
+  public static Connection conn;
+  public static Contact current;
+
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (e.getActionCommand().equals("Connect")) {
-      myUI.firstNameBox.setText("jwells1330");
-      myUI.middleNameBox.setText("Tw0C0ins");
-      myUI.lastNameBox.setText("localhost");
-      myUI.emailBox.setText("contactBook");
-      myUI.majorBox.setText("contact");
-      
-      myUI.connectToDB();
-      myUI.displayUI();
-    } else if (e.getActionCommand().equals("OK")) {
+    if (e.getActionCommand().equals("Exit")) {
+      myUI.closeUI();
       try {
-        System.out.println("Connecting to Database");
-        String connString = "jdbc:mysql://" + myUI.lastNameBox.getText() + "/" + myUI.emailBox.getText();
-        conn = SQLDatabaseConnector.connectToDatabase(connString, myUI.firstNameBox.getText(), myUI.middleNameBox.getText());
-        
-        SQLDatabaseConnector.displayAllContacts(conn);
-        
-        myUI.createLabels();
-        myUI.createButtons();
-        myUI.displayUI();
-        
+        conn.close();
       } catch (SQLException e1) {
-        myUI.unableToConnectUI();
+        e1.printStackTrace();
       }
 
-    }
-    else if(e.getActionCommand().equals("Exit")){
-      myUI.close();
-    }
-    else if(e.getActionCommand().equals("Clear DB")){
+    } else if (e.getActionCommand().equals("Connect")) {
+      System.out.println(ContactApplication.defaultOrCurrent);
+      myUI.createLabels(2);
+      myUI.createTextBoxes(ContactApplication.defaultOrCurrent);
+      myUI.createButtons(2);
+      myUI.displayUI();
+
+    } else if (e.getActionCommand().equals("Clear DB")) {
       try {
         SQLDatabaseConnector.deleteAllContacts(conn);
+        myUI.createTextBoxes(0);
+        myUI.displayUI();
+      } catch (SQLException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getActionCommand().equals("Add")) {
+
+      current = myUI.grabInputAsContact();
+      
+      myUI.createTextBoxes(0);
+      myUI.createButtons(3);
+      myUI.displayUI();
+
+    } else if (e.getSource().equals(myUI.buttonOK)) {
+      try {
+        SQLDatabaseConnector.createNewContact(conn, myUI.grabInputAsContact());
+        myUI.createButtons(1);
+        myUI.createTextBoxes(0);
+        myUI.displayUI();
+        myUI.firstBox.setText(current.getFirstName());
+        myUI.secondBox.setText(current.getMiddleName());
+        myUI.thirdBox.setText(current.getLastName());
+        myUI.fourthBox.setText(current.getEmail());
+        myUI.fifthBox.setText(current.getMajor());
+        
+      } catch (SQLException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getActionCommand().equals("Cancel")) {
+      myUI.createButtons(1);
+      myUI.createTextBoxes(0);
+      myUI.displayUI();
+      myUI.firstBox.setText(current.getFirstName());
+      myUI.secondBox.setText(current.getMiddleName());
+      myUI.thirdBox.setText(current.getLastName());
+      myUI.fourthBox.setText(current.getEmail());
+      myUI.fifthBox.setText(current.getMajor());
+
+    } else if (e.getActionCommand().equals("Remove")) {
+      try {
+        SQLDatabaseConnector.deleteContact(conn, myUI.grabInputAsContact());
+
+      } catch (SQLException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getActionCommand().equals("Update")) {
+      try {
+
+        SQLDatabaseConnector.updateContact(conn, myUI.grabInputAsContact());
+      } catch (SQLException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getActionCommand().equals("OK")) {
+      String connString = "jdbc:mysql://" + myUI.thirdBox.getText() + "/" + myUI.fourthBox.getText();
+      try {
+        conn = SQLDatabaseConnector.connectToDatabase(connString, myUI.firstBox.getText(), myUI.secondBox.getText());
+
+        ContactApplication.currentUser = myUI.firstBox.getText();
+        ContactApplication.currentPass = myUI.secondBox.getText();
+        ContactApplication.currentIP = myUI.thirdBox.getText();
+        ContactApplication.currentDB = myUI.fourthBox.getText();
+        ContactApplication.currentTable = myUI.fifthBox.getText();
+        ContactApplication.defaultOrCurrent = 2;
+        SQLDatabaseConnector.displayFirst(conn);
+        myUI.enableMenuItems();
+        myUI.createLabels(1);
+        myUI.createButtons(1);
+        myUI.displayUI();
+      } catch (SQLException e1) {
+        myUI.connectionToDBFailed();
+      }
+    } else if (e.getActionCommand().equals("Next")) {
+      try {
+        SQLDatabaseConnector.displayNext(conn, myUI.grabInputAsContact());
+      } catch (SQLException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getActionCommand().equals("Previous")) {
+      try {
+        SQLDatabaseConnector.displayPrevious(conn, myUI.grabInputAsContact());
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
     }
-    
-
   }
-
 }

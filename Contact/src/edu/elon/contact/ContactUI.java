@@ -1,107 +1,166 @@
 package edu.elon.contact;
 
-import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import javax.swing.*;
 
+/*
+ * Copyright (c) 2016 Jake Wells and Mitch Thompson
+ * 
+ * ContactUI Class holds the gui for the Contact Application
+ */
 public class ContactUI {
 
-  private JFrame frame;
-  private JPanel labelPanel;
-  private JPanel panel;
-  private JPanel buttonPanel;
+  private JFrame mainFrame;
+  private JPanel labelPanel = new JPanel();
+  private JPanel textPanel = new JPanel();
+  private JPanel buttonPanel = new JPanel();
+  private JMenuBar menuBar = new JMenuBar();
+
   private JButton button;
-  private JMenuBar menuBar;
   private JMenu menu;
   private JMenuItem menuItem;
-  protected JTextField firstNameBox;
-  protected JTextField middleNameBox;
-  protected JTextField lastNameBox;
-  protected JTextField emailBox;
-  protected JTextField majorBox;
-  
+
+  private boolean enabled;
+
+  protected JButton buttonOK;
+  protected JTextField firstBox;
+  protected JTextField secondBox;
+  protected JTextField thirdBox;
+  protected JTextField fourthBox;
+  protected JTextField fifthBox;
 
   public ContactUI() {
   }
 
-  public void createUI() {
-
-    createFrame();
-    createLabels();
-    createTextBoxes();
-    createButtons();
-    createMenu();
-
-  }
-
+  //Creates main Frame of GUI
   public void createFrame() {
-    frame = new JFrame("Contact Display View");
-    frame.setSize(400, 200);
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+    mainFrame = new JFrame("Contact Display View");
+    mainFrame.setSize(400, 200);
+    mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    mainFrame.getContentPane().setBackground(Color.LIGHT_GRAY);
+
   }
 
-  public void createLabels() {
-    labelPanel = new JPanel();
+  //Creates labels for GUI
+  //int type: type of labels needed
+  public void createLabels(int type) {
+    labelPanel.removeAll();
     labelPanel.setLayout(new GridLayout(5, 1));
+    JLabel firstLabel = new JLabel();
+    JLabel secondLabel = new JLabel();
+    JLabel thirdLabel = new JLabel();
+    JLabel fourthLabel = new JLabel();
+    JLabel fifthLabel = new JLabel();
 
-    JLabel firstName = new JLabel("First Name");
-    JLabel middleName = new JLabel("Middle Name");
-    JLabel lastName = new JLabel("Last Name");
-    JLabel emailLabel = new JLabel("Email");
-    JLabel majorLabel = new JLabel("Major");
+    if (type == 1) {
+      firstLabel.setText("First Name");
+      secondLabel.setText("Middle Name");
+      thirdLabel.setText("Last Name");
+      fourthLabel.setText("Email");
+      fifthLabel.setText("Major");
+    } else if (type == 2) {
+      firstLabel.setText("Username");
+      secondLabel.setText("Password");
+      thirdLabel.setText("IP Address");
+      fourthLabel.setText("DB Name");
+      fifthLabel.setText("Table Name");
+    }
 
-    labelPanel.add(firstName);
-    labelPanel.add(middleName);
-    labelPanel.add(lastName);
-    labelPanel.add(emailLabel);
-    labelPanel.add(majorLabel);
-    
-    frame.add(labelPanel, BorderLayout.LINE_START);
+    labelPanel.add(firstLabel);
+    labelPanel.add(secondLabel);
+    labelPanel.add(thirdLabel);
+    labelPanel.add(fourthLabel);
+    labelPanel.add(fifthLabel);
+
+    mainFrame.add(labelPanel, BorderLayout.LINE_START);
   }
 
-  public void createTextBoxes() {
-    panel = new JPanel();
-    panel.setLayout(new GridLayout(5, 1));
-
-    firstNameBox = new JTextField();
-    middleNameBox = new JTextField();
-    lastNameBox = new JTextField();
-    emailBox = new JTextField();
-    majorBox = new JTextField();
-
-    panel.add(firstNameBox);
-    panel.add(middleNameBox);
-    panel.add(lastNameBox);
-    panel.add(emailBox);
-    panel.add(majorBox);
-    
-    frame.add(panel, BorderLayout.CENTER);
+  //Creates text boxes for GUI
+  //int type: type of text boxes needed 
+  public void createTextBoxes(int type) {
+    textPanel.removeAll();
+    textPanel.setLayout(new GridLayout(5, 1));
+    firstBox = new JTextField();
+    secondBox = new JTextField();
+    thirdBox = new JTextField();
+    fourthBox = new JTextField();
+    fifthBox = new JTextField();
+    if (type == 0) {
+      firstBox.setText("");
+      secondBox.setText("");
+      thirdBox.setText("");
+      fourthBox.setText("");
+      fifthBox.setText("");
+    } else if (type == 1) {
+      firstBox.setText(SQLDatabaseConnector.defaultUser);
+      secondBox.setText(SQLDatabaseConnector.defaultPass);
+      thirdBox.setText(SQLDatabaseConnector.defaultIP);
+      fourthBox.setText(SQLDatabaseConnector.defaultDB);
+      fifthBox.setText(SQLDatabaseConnector.defaultTable);
+    } else if (type == 2) {
+      firstBox.setText(ContactApplication.currentUser);
+      secondBox.setText(ContactApplication.currentPass);
+      thirdBox.setText(ContactApplication.currentIP);
+      fourthBox.setText(ContactApplication.currentDB);
+      fifthBox.setText(ContactApplication.currentTable);
+    }
+    textPanel.add(firstBox);
+    textPanel.add(secondBox);
+    textPanel.add(thirdBox);
+    textPanel.add(fourthBox);
+    textPanel.add(fifthBox);
+    mainFrame.add(textPanel, BorderLayout.CENTER);
   }
 
-  public void createButtons(){
-    buttonPanel = new JPanel();
-    
-    button = new JButton("Next");
-    buttonPanel.add(button, BorderLayout.LINE_END);
-    
-    button = new JButton("Previous");
-    buttonPanel.add(button, BorderLayout.LINE_START);
-    
-    frame.add(buttonPanel, BorderLayout.PAGE_END);
+  //Creates buttons for GUI
+  //int type: type of buttons needed
+  public void createButtons(int type) {
+    buttonPanel.removeAll();
+    if (type == 1) {
+      button = new JButton("Next");
+      buttonPanel.add(button, BorderLayout.LINE_END);
+      button.addActionListener(new UIActionListener());
+      button = new JButton("Previous");
+      buttonPanel.add(button, BorderLayout.LINE_START);
+      button.addActionListener(new UIActionListener());
+    } else if (type == 2) {
+      button = new JButton("OK");
+      button.addActionListener(new UIActionListener());
+      buttonPanel.add(button);
+    } else if (type == 3) {
+      buttonOK = new JButton("OK");
+      buttonOK.addActionListener(new UIActionListener());
+      buttonPanel.add(buttonOK, BorderLayout.LINE_END);  
+      button = new JButton("Cancel");
+      buttonPanel.add(button, BorderLayout.LINE_START);
+      button.addActionListener(new UIActionListener());
+    }
+
+    mainFrame.add(buttonPanel, BorderLayout.PAGE_END);
   }
-  
-  public void createMenu(){
-    menuBar = new JMenuBar();
-    
+
+  //Creates menus for GUI
+  public void createMenu() {
+    menuBar.removeAll();
+
     menu = new JMenu("File");
     menu.setMnemonic(KeyEvent.VK_F);
-    
+
     menuItem = new JMenuItem("Clear DB", KeyEvent.VK_C);
     menuItem.addActionListener(new UIActionListener());
-    menuItem.setEnabled(false);
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
     menuItem = new JMenuItem("Connect", KeyEvent.VK_T);
     menuItem.addActionListener(new UIActionListener());
@@ -110,74 +169,54 @@ public class ContactUI {
     menuItem = new JMenuItem("Exit", KeyEvent.VK_X);
     menuItem.addActionListener(new UIActionListener());
     menu.add(menuItem);
-    
+
     menuBar.add(menu, BorderLayout.WEST);
-    
-    
-    
+
     menu = new JMenu("Edit");
     menu.setMnemonic(KeyEvent.VK_E);
-    
+
     menuItem = new JMenuItem("Add", KeyEvent.VK_A);
-    menuItem.setEnabled(false);
+    menuItem.addActionListener(new UIActionListener());
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
     menuItem = new JMenuItem("Remove", KeyEvent.VK_R);
-    menuItem.setEnabled(false);
+    menuItem.addActionListener(new UIActionListener());
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
     menuItem = new JMenuItem("Update", KeyEvent.VK_U);
-    menuItem.setEnabled(false);
+    menuItem.addActionListener(new UIActionListener());
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
-    
     menuBar.add(menu, BorderLayout.CENTER);
-    
-    
-    
-    frame.add(menuBar, BorderLayout.PAGE_START);
-  }
-  
-  public Contact grabInputAsContact(){
-	  Contact c = new Contact();
-	  c.setFirstName(firstNameBox.getText());
-	  c.setMiddleName(middleNameBox.getText());
-	  c.setLastName(lastNameBox.getText());
-	  c.setEmail(emailBox.getText());
-	  c.setMajor(majorBox.getText());
-	  return c;
-  }
-  
-  public void connectToDB(){
-    labelPanel.removeAll();
-//    labelPanel = new JPanel();
-//    labelPanel.setLayout(new GridLayout(5, 1));
-
-    JLabel userName = new JLabel("User Name");
-    JLabel Password = new JLabel("Password");
-    JLabel IP = new JLabel("IP Address");
-    JLabel DBName = new JLabel("Database Name");
-    JLabel tableName = new JLabel("Table Name");
-
-    labelPanel.add(userName);
-    labelPanel.add(Password);
-    labelPanel.add(IP);
-    labelPanel.add(DBName);
-    labelPanel.add(tableName);
-    
-    frame.add(labelPanel, BorderLayout.LINE_START);
-    
-    button = new JButton("OK");
-    button.addActionListener(new UIActionListener());
-    buttonPanel.removeAll();
-    buttonPanel.add(button);
+    mainFrame.add(menuBar, BorderLayout.PAGE_START);
 
   }
-  public void unableToConnectUI(){
-    JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert", JOptionPane.ERROR_MESSAGE);
+
+  //Takes info in text boxes and converts to Contact object
+  public Contact grabInputAsContact() {
+    Contact c = new Contact(firstBox.getText(),secondBox.getText(),thirdBox.getText(),fourthBox.getText(),fifthBox.getText());
+    return c;
   }
-  public void close(){
-    frame.dispose();
+
+  //enables menu items (for use after connection to database)
+  public void enableMenuItems() {
+    enabled = true;
+    createMenu();
   }
+
+  //displays the mainframe and all components 
   public void displayUI() {
-    frame.setVisible(true);
+    mainFrame.setVisible(true);
   }
 
+  //opens JOptionPane on db connection fail
+  public void connectionToDBFailed() {
+    JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert",
+        JOptionPane.ERROR_MESSAGE);
+  }
+ 
+  //closes ui
+  public void closeUI() {
+    mainFrame.dispose();
+  }
 }
