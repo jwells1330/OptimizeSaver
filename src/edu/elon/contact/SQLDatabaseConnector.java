@@ -2,7 +2,6 @@ package edu.elon.contact;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +23,7 @@ public class SQLDatabaseConnector {
   public static Connection connectToDatabase(String connString, String userName, String passWord) throws SQLException {
 
     Connection conn = null;
-
+    System.out.println("Connection to Database step 2");
     conn = DriverManager.getConnection(connString, userName, passWord);
     return conn;
   }

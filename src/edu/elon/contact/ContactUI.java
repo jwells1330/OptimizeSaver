@@ -22,12 +22,14 @@ public class ContactUI {
   private JPanel labelPanel = new JPanel();
   private JPanel textPanel = new JPanel();
   private JPanel buttonPanel = new JPanel();
+  private JMenuBar menuBar = new JMenuBar();
   
   private JButton button;
-  private JMenuBar menuBar;
   private JMenu menu;
   private JMenuItem menuItem;
-
+  
+  private boolean enabled;
+  
   protected JTextField firstBox;
   protected JTextField secondBox;
   protected JTextField thirdBox;
@@ -117,12 +119,13 @@ public class ContactUI {
     if(type == 1){
       button = new JButton("Next");
       buttonPanel.add(button, BorderLayout.LINE_END);
-      
+      button.addActionListener(new UIActionListener());
       button = new JButton("Previous");
       buttonPanel.add(button, BorderLayout.LINE_START);
-    }else if(type ==2 ){
+      button.addActionListener(new UIActionListener());
+    }else if(type == 2 ){
       button = new JButton("OK");
-      menuItem.addActionListener(new UIActionListener());
+      button.addActionListener(new UIActionListener());
       buttonPanel.add(button);
     }
 
@@ -131,14 +134,14 @@ public class ContactUI {
   
 
   public void createMenu(){
-    menuBar = new JMenuBar();
+    menuBar.removeAll();
     
     menu = new JMenu("File");
     menu.setMnemonic(KeyEvent.VK_F);
     
     menuItem = new JMenuItem("Clear DB", KeyEvent.VK_C);
     menuItem.addActionListener(new UIActionListener());
-    menuItem.setEnabled(false);
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
     menuItem = new JMenuItem("Connect", KeyEvent.VK_T);
     menuItem.addActionListener(new UIActionListener());
@@ -156,15 +159,15 @@ public class ContactUI {
     
     menuItem = new JMenuItem("Add", KeyEvent.VK_A);
     menuItem.addActionListener(new UIActionListener());
-    menuItem.setEnabled(false);
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
     menuItem = new JMenuItem("Remove", KeyEvent.VK_R);
     menuItem.addActionListener(new UIActionListener());
-    menuItem.setEnabled(false);
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
     menuItem = new JMenuItem("Update", KeyEvent.VK_U);
     menuItem.addActionListener(new UIActionListener());
-    menuItem.setEnabled(false);
+    menuItem.setEnabled(enabled);
     menu.add(menuItem);
     
     menuBar.add(menu, BorderLayout.CENTER);
@@ -182,6 +185,10 @@ public class ContactUI {
     c.setMajor(fifthBox.getText());
     return c;
 }
+  public void enableMenuItems(){
+    enabled = true;
+    createMenu();
+  }
   public void displayUI() {
     mainFrame.setVisible(true);
   }
