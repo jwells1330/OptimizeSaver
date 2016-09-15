@@ -1,5 +1,10 @@
 package edu.elon.contact;
 
+
+/*
+ * Copyright (c) 2016 Jake Wells and Mitch Thompson
+ * 
+ */
 public class Contact {
 
     private String firstName;

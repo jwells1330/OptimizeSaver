@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/*
+ * Copyright (c) 2016 Jake Wells and Mitch Thompson
+ * 
+ */
 public class UIActionListener implements ActionListener {
 
   private ContactUI myUI = ContactApplication.myUI;
@@ -47,11 +51,9 @@ public class UIActionListener implements ActionListener {
     } else if (e.getSource().equals(myUI.buttonOK)) {
       try {
         SQLDatabaseConnector.createNewContact(conn, myUI.grabInputAsContact());
-        
         myUI.createButtons(1);
         myUI.createTextBoxes(0);
         myUI.displayUI();
-        
         myUI.firstBox.setText(current.getFirstName());
         myUI.secondBox.setText(current.getMiddleName());
         myUI.thirdBox.setText(current.getLastName());
@@ -64,7 +66,6 @@ public class UIActionListener implements ActionListener {
       myUI.createButtons(1);
       myUI.createTextBoxes(0);
       myUI.displayUI();
-      
       myUI.firstBox.setText(current.getFirstName());
       myUI.secondBox.setText(current.getMiddleName());
       myUI.thirdBox.setText(current.getLastName());
@@ -96,9 +97,7 @@ public class UIActionListener implements ActionListener {
         ContactApplication.currentDB = myUI.fourthBox.getText();
         ContactApplication.currentTable = myUI.fifthBox.getText();
         ContactApplication.defaultOrCurrent = 2;
-
         SQLDatabaseConnector.displayFirst(conn);
-
         myUI.enableMenuItems();
         myUI.createLabels(1);
         myUI.createButtons(1);

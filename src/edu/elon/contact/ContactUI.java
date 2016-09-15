@@ -14,6 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+/*
+ * Copyright (c) 2016 Jake Wells and Mitch Thompson
+ * 
+ */
 public class ContactUI {
 
   private JFrame mainFrame;
@@ -49,7 +54,6 @@ public class ContactUI {
   public void createLabels(int type) {
     labelPanel.removeAll();
     labelPanel.setLayout(new GridLayout(5, 1));
-
     JLabel firstLabel = new JLabel();
     JLabel secondLabel = new JLabel();
     JLabel thirdLabel = new JLabel();
@@ -82,7 +86,6 @@ public class ContactUI {
   public void createTextBoxes(int type) {
     textPanel.removeAll();
     textPanel.setLayout(new GridLayout(5, 1));
-
     firstBox = new JTextField();
     secondBox = new JTextField();
     thirdBox = new JTextField();
@@ -107,19 +110,16 @@ public class ContactUI {
       fourthBox.setText(ContactApplication.currentDB);
       fifthBox.setText(ContactApplication.currentTable);
     }
-
     textPanel.add(firstBox);
     textPanel.add(secondBox);
     textPanel.add(thirdBox);
     textPanel.add(fourthBox);
     textPanel.add(fifthBox);
-
     mainFrame.add(textPanel, BorderLayout.CENTER);
   }
 
   public void createButtons(int type) {
     buttonPanel.removeAll();
-
     if (type == 1) {
       button = new JButton("Next");
       buttonPanel.add(button, BorderLayout.LINE_END);
@@ -134,8 +134,7 @@ public class ContactUI {
     } else if (type == 3) {
       buttonOK = new JButton("OK");
       buttonOK.addActionListener(new UIActionListener());
-      buttonPanel.add(buttonOK, BorderLayout.LINE_END);
-      
+      buttonPanel.add(buttonOK, BorderLayout.LINE_END);  
       button = new JButton("Cancel");
       buttonPanel.add(button, BorderLayout.LINE_START);
       button.addActionListener(new UIActionListener());
@@ -179,9 +178,7 @@ public class ContactUI {
     menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(enabled);
     menu.add(menuItem);
-
     menuBar.add(menu, BorderLayout.CENTER);
-
     mainFrame.add(menuBar, BorderLayout.PAGE_START);
 
   }
