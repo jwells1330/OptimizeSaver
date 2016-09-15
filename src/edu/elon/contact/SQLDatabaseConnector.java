@@ -89,7 +89,7 @@ public class SQLDatabaseConnector {
     String deleteLastName = contact.getLastName();
 
     stmt.executeUpdate("UPDATE contact " + "SET" + " FirstName = '" + deleteFirstName + "', LastName = '"
-        + deleteLastName + "'");
+        + deleteLastName + "'" );
     stmt.close();
   }
   public static void displayNext(Connection conn, Contact contact) throws SQLException{
