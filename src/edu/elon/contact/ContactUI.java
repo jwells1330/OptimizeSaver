@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
 public class ContactUI {
 
   private JFrame mainFrame;
@@ -23,13 +22,13 @@ public class ContactUI {
   private JPanel textPanel = new JPanel();
   private JPanel buttonPanel = new JPanel();
   private JMenuBar menuBar = new JMenuBar();
-  
+
   private JButton button;
   private JMenu menu;
   private JMenuItem menuItem;
-  
+
   private boolean enabled;
-  
+
   protected JTextField firstBox;
   protected JTextField secondBox;
   protected JTextField thirdBox;
@@ -89,8 +88,13 @@ public class ContactUI {
     thirdBox = new JTextField();
     fourthBox = new JTextField();
     fifthBox = new JTextField();
-
-    if (type == 1) {
+    if (type == 0) {
+      firstBox.setText("");
+      secondBox.setText("");
+      thirdBox.setText("");
+      fourthBox.setText("");
+      fifthBox.setText("");
+    } else if (type == 1) {
       firstBox.setText(SQLDatabaseConnector.defaultUser);
       secondBox.setText(SQLDatabaseConnector.defaultPass);
       thirdBox.setText(SQLDatabaseConnector.defaultIP);
@@ -115,15 +119,15 @@ public class ContactUI {
 
   public void createButtons(int type) {
     buttonPanel.removeAll();
-    
-    if(type == 1){
+
+    if (type == 1) {
       button = new JButton("Next");
       buttonPanel.add(button, BorderLayout.LINE_END);
       button.addActionListener(new UIActionListener());
       button = new JButton("Previous");
       buttonPanel.add(button, BorderLayout.LINE_START);
       button.addActionListener(new UIActionListener());
-    }else if(type == 2 ){
+    } else if (type == 2) {
       button = new JButton("OK");
       button.addActionListener(new UIActionListener());
       buttonPanel.add(button);
@@ -131,14 +135,13 @@ public class ContactUI {
 
     mainFrame.add(buttonPanel, BorderLayout.PAGE_END);
   }
-  
 
-  public void createMenu(){
+  public void createMenu() {
     menuBar.removeAll();
-    
+
     menu = new JMenu("File");
     menu.setMnemonic(KeyEvent.VK_F);
-    
+
     menuItem = new JMenuItem("Clear DB", KeyEvent.VK_C);
     menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(enabled);
@@ -150,13 +153,12 @@ public class ContactUI {
     menuItem = new JMenuItem("Exit", KeyEvent.VK_X);
     menuItem.addActionListener(new UIActionListener());
     menu.add(menuItem);
-    
+
     menuBar.add(menu, BorderLayout.WEST);
-    
-    
+
     menu = new JMenu("Edit");
     menu.setMnemonic(KeyEvent.VK_E);
-    
+
     menuItem = new JMenuItem("Add", KeyEvent.VK_A);
     menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(enabled);
@@ -169,14 +171,14 @@ public class ContactUI {
     menuItem.addActionListener(new UIActionListener());
     menuItem.setEnabled(enabled);
     menu.add(menuItem);
-    
+
     menuBar.add(menu, BorderLayout.CENTER);
-    
+
     mainFrame.add(menuBar, BorderLayout.PAGE_START);
-    
-    
+
   }
-  public Contact grabInputAsContact(){
+
+  public Contact grabInputAsContact() {
     Contact c = new Contact();
     c.setFirstName(firstBox.getText());
     c.setMiddleName(secondBox.getText());
@@ -184,18 +186,23 @@ public class ContactUI {
     c.setEmail(fourthBox.getText());
     c.setMajor(fifthBox.getText());
     return c;
-}
-  public void enableMenuItems(){
+  }
+
+  public void enableMenuItems() {
     enabled = true;
     createMenu();
   }
+
   public void displayUI() {
     mainFrame.setVisible(true);
   }
-  public void connectionToDBFailed(){
-    JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert", JOptionPane.ERROR_MESSAGE);
+
+  public void connectionToDBFailed() {
+    JOptionPane.showMessageDialog(null, "You did not correctly specify DB paramaters", "alert",
+        JOptionPane.ERROR_MESSAGE);
   }
-  public void closeUI(){
+
+  public void closeUI() {
     mainFrame.dispose();
   }
 }

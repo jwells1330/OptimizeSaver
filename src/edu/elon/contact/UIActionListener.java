@@ -30,7 +30,8 @@ public class UIActionListener implements ActionListener {
     } else if (e.getActionCommand().equals("Clear DB")) {
       try {
         SQLDatabaseConnector.deleteAllContacts(conn);
-        SQLDatabaseConnector.displayFirst(conn);
+        myUI.createTextBoxes(0);
+        myUI.displayUI();
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
@@ -43,6 +44,7 @@ public class UIActionListener implements ActionListener {
     } else if (e.getActionCommand().equals("Remove")) {
       try {
         SQLDatabaseConnector.deleteContact(conn, myUI.grabInputAsContact());
+        
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
@@ -57,11 +59,6 @@ public class UIActionListener implements ActionListener {
       try {
         conn = SQLDatabaseConnector.connectToDatabase(connString, myUI.firstBox.getText(), myUI.secondBox.getText());
 
-        myUI.enableMenuItems();
-        myUI.createLabels(1);
-        myUI.createButtons(1);
-        myUI.displayUI();
-
         ContactApplication.currentUser = myUI.firstBox.getText();
         ContactApplication.currentPass = myUI.secondBox.getText();
         ContactApplication.currentIP = myUI.thirdBox.getText();
@@ -70,14 +67,23 @@ public class UIActionListener implements ActionListener {
         ContactApplication.defaultOrCurrent = 2;
         
         SQLDatabaseConnector.displayFirst(conn);
+        
+        myUI.enableMenuItems();
+        myUI.createLabels(1);
+        myUI.createButtons(1);
+        myUI.displayUI();
       } catch (SQLException e1) {
-        System.out.println(e1);
         myUI.connectionToDBFailed();
       }
     } else if (e.getActionCommand().equals("Next")) {
       try {
-        System.out.println("Displaying Next");
         SQLDatabaseConnector.displayNext(conn, myUI.grabInputAsContact());
+      } catch (SQLException e1) {
+        e1.printStackTrace();
+      }
+    } else if(e.getActionCommand().equals("Previous")){
+      try {
+        SQLDatabaseConnector.displayPrevious(conn, myUI.grabInputAsContact());
       } catch (SQLException e1) {
         e1.printStackTrace();
       }

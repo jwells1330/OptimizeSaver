@@ -67,12 +67,30 @@ public class SQLDatabaseConnector {
     Statement stmt = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-    String deleteFirstName = contact.getFirstName();
-    String deleteLastName = contact.getLastName();
 
+    ResultSet rs = stmt.executeQuery("SELECT ContactId FROM contact WHERE Email = '" + contact.getEmail() + "'");
+    rs.next();
+    int current = rs.getInt(1);
+    rs = stmt.executeQuery("SELECT * FROM contact");
+    rs.last();
+    int max = rs.getRow();
+    if(current<max){
+      displayNext(conn, contact);
+    }else{
+      displayPrevious(conn, contact);
+    }
+    
     stmt.executeUpdate(
-        "DELETE FROM contact " + "WHERE firstName = '" + deleteFirstName + "' AND lastName = '" + deleteLastName + "'");
+        "DELETE FROM contact " + "WHERE email = '" + contact.getEmail() + "'");
+    
+    
+    
+    
+    
+    
     stmt.close();
+    
+    
   }
 
   public static void updateContact(Connection conn, Contact contact) throws SQLException {
@@ -90,7 +108,7 @@ public class SQLDatabaseConnector {
     Statement stmt = null;
     ResultSet rs = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-    rs = stmt.executeQuery("SELECT ContactId FROM contact WHERE Email = '" + myUI.fourthBox.getText() + "'");
+    rs = stmt.executeQuery("SELECT ContactId FROM contact WHERE Email = '" + contact.getEmail() + "'");
     rs.next();
     int current = rs.getInt(1);
     rs = stmt.executeQuery("SELECT * FROM contact");
@@ -110,6 +128,29 @@ public class SQLDatabaseConnector {
     stmt.close();
   }
   
+  public static void displayPrevious(Connection conn, Contact contact) throws SQLException{
+    Statement stmt = null;
+    ResultSet rs = null;
+    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    rs = stmt.executeQuery("SELECT ContactId FROM contact WHERE Email = '" + contact.getEmail() + "'");
+    rs.next();
+    int current = rs.getInt(1);
+    rs = stmt.executeQuery("SELECT * FROM contact");
+    if(current>10){
+      rs.absolute(current-1);
+    }else{
+      rs.next();
+    }
+
+    myUI.firstBox.setText(rs.getString(2));
+    myUI.secondBox.setText(rs.getString(3));
+    myUI.thirdBox.setText(rs.getString(4));
+    myUI.fourthBox.setText(rs.getString(5));
+    myUI.fifthBox.setText(rs.getString(6));
+    
+    rs.close();
+    stmt.close();
+  }
   
   
 }
