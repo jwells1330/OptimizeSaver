@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -188,12 +187,7 @@ public class ContactUI {
   }
 
   public Contact grabInputAsContact() {
-    Contact c = new Contact();
-    c.setFirstName(firstBox.getText());
-    c.setMiddleName(secondBox.getText());
-    c.setLastName(thirdBox.getText());
-    c.setEmail(fourthBox.getText());
-    c.setMajor(fifthBox.getText());
+    Contact c = new Contact(firstBox.getText(),secondBox.getText(),thirdBox.getText(),fourthBox.getText(),fifthBox.getText());
     return c;
   }
 
