@@ -107,12 +107,17 @@ public class DBTest {
 	@Test
 	public void testRemoveContact() throws SQLException {
 		SQLDatabaseConnector.deleteContact(conn, contact);
-		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
+		SQLDatabaseConnector.deleteContact(conn, contact);
+		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        ResultSet rs = stmt.executeQuery("SElECT * FROM contact");
+        rs.last();
+        assertEquals(rs.getRow(), 0);
 	}
 	
 	@Test
 	public void testDeleteAllContacts() throws SQLException{
-		SQLDatabaseConnector.deleteAllContacts(conn);
+		SQLDatabaseConnector.createNewContact(conn, contact);
+	    SQLDatabaseConnector.deleteAllContacts(conn);
 		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		ResultSet rs = stmt.executeQuery("SElECT * FROM contact");
 		rs.last();
