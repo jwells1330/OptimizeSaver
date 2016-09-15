@@ -37,6 +37,7 @@ public class UIActionListener implements ActionListener {
       }
     } else if (e.getActionCommand().equals("Add")) {
       try {
+        myUI.createTextBoxes(0);
         SQLDatabaseConnector.createNewContact(conn, myUI.grabInputAsContact());
       } catch (SQLException e1) {
         e1.printStackTrace();
@@ -50,6 +51,7 @@ public class UIActionListener implements ActionListener {
       }
     } else if (e.getActionCommand().equals("Update")) {
       try {
+        
         SQLDatabaseConnector.updateContact(conn, myUI.grabInputAsContact());
       } catch (SQLException e1) {
         e1.printStackTrace();
