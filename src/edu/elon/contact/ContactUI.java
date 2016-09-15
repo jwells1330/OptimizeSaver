@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -130,6 +131,16 @@ public class ContactUI {
     }
 
     mainFrame.add(buttonPanel, BorderLayout.PAGE_END);
+  }
+  
+  private ArrayList<Contact> contacts;
+  
+  public void nextContact(){
+	  
+  }
+  
+  public void previousContact(){
+	  
   }
   
 
