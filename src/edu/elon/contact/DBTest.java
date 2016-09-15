@@ -15,8 +15,8 @@ import org.junit.Test;
 // WARNING: THIS TEST CLASS EDITS THE DATABASE. Couldn't figure out how to do virtualization of SQL script on my own, and can't
 // use code that either Jacob or myself did not write, obviously.
 
-// Best way to test this right now is create a SEPARATE test database on your own server, and run the script that Dave Powell
-// provided for this project so it is ready to be worked with in the same way as original.
+// Best way to test this right now is create a SEPARATE test database on your own server, and run the sqlscript that Jacob
+// wrote for this project so it is ready to be worked with in the same way as original.
 
 public class DBTest {
 	
