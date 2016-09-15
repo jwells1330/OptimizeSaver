@@ -101,13 +101,14 @@ public class SQLDatabaseConnector {
 
   public static void updateContact(Connection conn, Contact contact) throws SQLException {
     Statement stmt = null;
+    ResultSet rs = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
+    rs = stmt.executeQuery("SELECT ContactId FROM contact WHERE LastName = '" + contact.getLastName() + "'"); //better way to do this??
     String deleteFirstName = contact.getFirstName();
     String deleteLastName = contact.getLastName();
 
     stmt.executeUpdate("UPDATE contact " + "SET" + " FirstName = '" + deleteFirstName + "', LastName = '"
-        + deleteLastName + "'" );
+        + deleteLastName + "' WHERE ContactId = "  );  //add shit here to figure out the id
     stmt.close();
   }
   public static void displayNext(Connection conn, Contact contact) throws SQLException{
