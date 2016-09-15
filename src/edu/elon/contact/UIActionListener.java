@@ -26,7 +26,7 @@ public class UIActionListener implements ActionListener {
       }
 
     } else if (e.getActionCommand().equals("Connect")) {
-
+      System.out.println(ContactApplication.defaultOrCurrent);
       myUI.createLabels(2);
       myUI.createTextBoxes(ContactApplication.defaultOrCurrent);
       myUI.createButtons(2);
@@ -59,6 +59,7 @@ public class UIActionListener implements ActionListener {
         myUI.thirdBox.setText(current.getLastName());
         myUI.fourthBox.setText(current.getEmail());
         myUI.fifthBox.setText(current.getMajor());
+        
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
