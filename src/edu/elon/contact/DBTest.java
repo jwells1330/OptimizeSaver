@@ -109,12 +109,12 @@ public class DBTest {
 		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		 ResultSet rs = stmt.executeQuery("SELECT * FROM contact WHERE FirstName = 'Mitchell'");
 		 rs.next();
-		
 	}
 	
 	@Test
 	public void testDeleteAllContacts() throws SQLException{
-		SQLDatabaseConnector.deleteAllContacts(conn);
+		SQLDatabaseConnector.createNewContact(conn, contact);
+	    SQLDatabaseConnector.deleteAllContacts(conn);
 		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		ResultSet rs = stmt.executeQuery("SElECT * FROM contact");
 		rs.last();
