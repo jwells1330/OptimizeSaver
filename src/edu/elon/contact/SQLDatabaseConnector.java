@@ -47,10 +47,6 @@ public class SQLDatabaseConnector {
 
   }
 
-  public static ArrayList<Contact> giveList() {
-    return null;
-  }
-
   public static void deleteAllContacts(Connection conn) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement();

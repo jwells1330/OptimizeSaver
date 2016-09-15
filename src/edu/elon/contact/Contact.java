@@ -8,6 +8,15 @@ public class Contact {
     private String email;
     private String major;
     
+    
+    public Contact(String firstName, String middleName, String lastName, String email, String major){
+    	this.firstName = firstName;
+    	this.middleName = middleName;
+    	this.lastName = lastName;
+    	this.email = email;
+    	this.major = major;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
