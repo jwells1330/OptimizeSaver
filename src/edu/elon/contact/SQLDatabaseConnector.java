@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class SQLDatabaseConnector {
 
@@ -34,6 +35,7 @@ public class SQLDatabaseConnector {
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     rs = stmt.executeQuery("SELECT * FROM contact");
     rs.next();
+    
 
     myUI.firstBox.setText(rs.getString(2));
     myUI.secondBox.setText(rs.getString(3));
@@ -44,6 +46,10 @@ public class SQLDatabaseConnector {
     rs.close();
     stmt.close();
 
+  }
+  
+  public static ArrayList<Contact> giveList(){
+	  return null;
   }
   
   public static void deleteAllContacts(Connection conn) throws SQLException {
@@ -100,8 +106,8 @@ public class SQLDatabaseConnector {
     String deleteFirstName = contact.getFirstName();
     String deleteLastName = contact.getLastName();
 
-    stmt.executeUpdate("UPDATE contact " + "SET" + "WHERE firstName = '" + deleteFirstName + "' AND lastName = '"
-        + deleteLastName + "'");
+    stmt.executeUpdate("UPDATE contact " + "SET" + " FirstName = '" + deleteFirstName + "', LastName = '"
+        + deleteLastName + "'" );
     stmt.close();
   }
   public static void displayNext(Connection conn, Contact contact) throws SQLException{
