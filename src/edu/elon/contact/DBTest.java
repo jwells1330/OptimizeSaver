@@ -16,7 +16,7 @@ import org.junit.Test;
 // WARNING: THIS TEST CLASS EDITS THE DATABASE. Couldn't figure out how to do virtualization of SQL script on my own, and can't
 // use code that either Jacob or myself did not write, obviously.
 
-// Best way to test this right now is create a SEPARATE test database on your own server, and run the sqlscript that Jacob
+// Best way to test this right now is create a SEPARATE test database on your own server, and run "ContactTestScript" that Jacob
 // wrote for this project so it is ready to be worked with in the same way as original.
 
 /*
@@ -33,6 +33,7 @@ public class DBTest {
 	private static String passWord;
 	private static String ip;
 	private static String databaseName;
+
 	
 	
 	
@@ -46,7 +47,7 @@ public class DBTest {
 		passWord = s.nextLine();
 		System.out.println("Enter IP of database: ");
 		ip = s.nextLine();
-		System.out.println("Enter name of database to work with. Non-test is contactBook.");
+		System.out.println("Enter name of database to work with. Default is 'contactBookTest'. Non-test is 'contactBook'.");
 		System.out.println("Only use if you are OK with editions. Otherwise make a test database with same fields manually. --");
 		databaseName = s.nextLine();
 		
