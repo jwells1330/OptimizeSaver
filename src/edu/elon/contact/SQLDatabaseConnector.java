@@ -88,7 +88,7 @@ public class SQLDatabaseConnector {
     String deleteFirstName = contact.getFirstName();
     String deleteLastName = contact.getLastName();
 
-    stmt.executeUpdate("UPDATE contact " + "SET" + "WHERE firstName = '" + deleteFirstName + "' AND lastName = '"
+    stmt.executeUpdate("UPDATE contact " + "SET" + " FirstName = '" + deleteFirstName + "', LastName = '"
         + deleteLastName + "'");
     stmt.close();
   }
