@@ -47,10 +47,6 @@ public class SQLDatabaseConnector {
 
   }
 
-  public static ArrayList<Contact> giveList() {
-    return null;
-  }
-
   public static void deleteAllContacts(Connection conn) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement();
@@ -61,8 +57,11 @@ public class SQLDatabaseConnector {
   public static void createNewContact(Connection conn, Contact contact) throws SQLException {
     Statement stmt = null;
     stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
-    stmt.executeUpdate("INSERT INTO contact" + "(FirstName,MiddleName,LastName,Email,Major) " + "Values" + "( "
+    
+    System.out.println("INSERT INTO contact " + "(FirstName, MiddleName, LastName, Email, Major) " + "VALUES ("
+    + contact.toString() + " )");
+    
+    stmt.executeUpdate("INSERT INTO contact " + "(FirstName, MiddleName, LastName, Email, Major) " + "VALUES ("
         + contact.toString() + " )");
 
     stmt.close();

@@ -41,8 +41,8 @@ public class Contact {
     
     @Override
     public String toString(){
-        return"" + firstName + "," + middleName + "," + lastName + "," +
-    email + "," + "," + major;
+        return("'" + firstName + "', '" + middleName + "', '" + lastName + "', '" +
+    email + "', '" + major + "'");
     }
     
     

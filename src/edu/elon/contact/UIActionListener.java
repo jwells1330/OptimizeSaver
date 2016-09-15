@@ -9,6 +9,7 @@ public class UIActionListener implements ActionListener {
 
   private ContactUI myUI = ContactApplication.myUI;
   public static Connection conn;
+  public static Contact current;
 
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -36,22 +37,50 @@ public class UIActionListener implements ActionListener {
         e1.printStackTrace();
       }
     } else if (e.getActionCommand().equals("Add")) {
+
+      current = myUI.grabInputAsContact();
+      
+      myUI.createTextBoxes(0);
+      myUI.createButtons(3);
+      myUI.displayUI();
+
+    } else if (e.getSource().equals(myUI.buttonOK)) {
       try {
-        myUI.createTextBoxes(0);
         SQLDatabaseConnector.createNewContact(conn, myUI.grabInputAsContact());
+        
+        myUI.createButtons(1);
+        myUI.createTextBoxes(0);
+        myUI.displayUI();
+        
+        myUI.firstBox.setText(current.getFirstName());
+        myUI.secondBox.setText(current.getMiddleName());
+        myUI.thirdBox.setText(current.getLastName());
+        myUI.fourthBox.setText(current.getEmail());
+        myUI.fifthBox.setText(current.getMajor());
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
+    } else if (e.getActionCommand().equals("Cancel")) {
+      myUI.createButtons(1);
+      myUI.createTextBoxes(0);
+      myUI.displayUI();
+      
+      myUI.firstBox.setText(current.getFirstName());
+      myUI.secondBox.setText(current.getMiddleName());
+      myUI.thirdBox.setText(current.getLastName());
+      myUI.fourthBox.setText(current.getEmail());
+      myUI.fifthBox.setText(current.getMajor());
+
     } else if (e.getActionCommand().equals("Remove")) {
       try {
         SQLDatabaseConnector.deleteContact(conn, myUI.grabInputAsContact());
-        
+
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
     } else if (e.getActionCommand().equals("Update")) {
       try {
-        
+
         SQLDatabaseConnector.updateContact(conn, myUI.grabInputAsContact());
       } catch (SQLException e1) {
         e1.printStackTrace();
@@ -67,9 +96,9 @@ public class UIActionListener implements ActionListener {
         ContactApplication.currentDB = myUI.fourthBox.getText();
         ContactApplication.currentTable = myUI.fifthBox.getText();
         ContactApplication.defaultOrCurrent = 2;
-        
+
         SQLDatabaseConnector.displayFirst(conn);
-        
+
         myUI.enableMenuItems();
         myUI.createLabels(1);
         myUI.createButtons(1);
@@ -83,7 +112,7 @@ public class UIActionListener implements ActionListener {
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
-    } else if(e.getActionCommand().equals("Previous")){
+    } else if (e.getActionCommand().equals("Previous")) {
       try {
         SQLDatabaseConnector.displayPrevious(conn, myUI.grabInputAsContact());
       } catch (SQLException e1) {

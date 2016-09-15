@@ -29,6 +29,7 @@ public class ContactUI {
 
   private boolean enabled;
 
+  protected JButton buttonOK;
   protected JTextField firstBox;
   protected JTextField secondBox;
   protected JTextField thirdBox;
@@ -131,6 +132,14 @@ public class ContactUI {
       button = new JButton("OK");
       button.addActionListener(new UIActionListener());
       buttonPanel.add(button);
+    } else if (type == 3) {
+      buttonOK = new JButton("OK");
+      buttonOK.addActionListener(new UIActionListener());
+      buttonPanel.add(buttonOK, BorderLayout.LINE_END);
+      
+      button = new JButton("Cancel");
+      buttonPanel.add(button, BorderLayout.LINE_START);
+      button.addActionListener(new UIActionListener());
     }
 
     mainFrame.add(buttonPanel, BorderLayout.PAGE_END);
