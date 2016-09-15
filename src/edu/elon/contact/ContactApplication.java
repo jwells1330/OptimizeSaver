@@ -2,11 +2,12 @@ package edu.elon.contact;
 
 public class ContactApplication {
 
-  public static String currentUser;
-  public static String currentPass;
-  public static String currentIP;
-  public static String currentDB;
-  public static String currentTable;
+  protected static String currentUser;
+  protected static String currentPass;
+  protected static String currentIP;
+  protected static String currentDB;
+  protected static String currentTable;
+  protected static int defaultOrCurrent = 1;
   
   public static ContactUI myUI;
   
