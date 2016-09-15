@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+/*
+ * Copyright (c) 2016 Jake Wells and Mitch Thompson
+ * 
+ */
 public class SQLDatabaseConnector {
 
   public static final String defaultUser = "jwells1330";

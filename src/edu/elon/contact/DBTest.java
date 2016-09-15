@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,6 +18,11 @@ import org.junit.Test;
 
 // Best way to test this right now is create a SEPARATE test database on your own server, and run "ContactTestScript" that Jacob
 // wrote for this project so it is ready to be worked with in the same way as original.
+
+/*
+ * Copyright (c) 2016 Jake Wells and Mitch Thompson
+ * 
+ */
 
 public class DBTest {
 	
