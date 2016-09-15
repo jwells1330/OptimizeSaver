@@ -17,8 +17,20 @@ public class DBTest {
 	}
 
 	@Test
-	public void test() {
+	public void testAddContact() {
 		fail("Not yet implemented");
+	}
+	
+	public void testUpdateContact(){
+		
+	}
+	
+	public void testRemoveContact(){
+		
+	}
+	
+	public void testDeleteAllContacts(){
+		
 	}
 
 }

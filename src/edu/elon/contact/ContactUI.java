@@ -135,12 +135,12 @@ public class ContactUI {
   
   private ArrayList<Contact> contacts;
   
-  public void nextContact(){
-	  
+  public Contact nextContact(){
+	  return null;
   }
   
-  public void previousContact(){
-	  
+  public Contact previousContact(){
+	  return null;
   }
   
 
