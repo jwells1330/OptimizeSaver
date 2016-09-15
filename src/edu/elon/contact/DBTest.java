@@ -47,10 +47,9 @@ public class DBTest {
 		passWord = s.nextLine();
 		System.out.println("Enter IP of database: ");
 		ip = s.nextLine();
-		System.out.println("Enter name of database to work with. Default is 'contactBookTest'. Non-test is 'contactBook'.");
-		System.out.println("Only use if you are OK with editions. Otherwise make a test database with same fields manually. --");
+		System.out.println("Enter name of database to work with. Suggested is 'contactBookTest'. Non-test is 'contactBook'.");
+		System.out.println("Only use if you are OK with editions. Otherwise make the test database with same fields as non-test manually. --");
 		databaseName = s.nextLine();
-		
 		connString = "jdbc:mysql://" + ip + "/" + databaseName;
 		s.close();
 		
@@ -104,9 +103,12 @@ public class DBTest {
 		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
 	}
 	
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testRemoveContact() throws SQLException {
 		SQLDatabaseConnector.deleteContact(conn, contact);
+		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		 ResultSet rs = stmt.executeQuery("SELECT * FROM contact WHERE FirstName = 'Mitchell'");
+		 rs.next();
 		//add code (usually SELECT statement) for checking editions are made, then assert value of statement
 	}
 	
