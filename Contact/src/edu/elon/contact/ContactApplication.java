@@ -1,6 +1,5 @@
 package edu.elon.contact;
 
-
 /*
  * Copyright (c) 2016 Jake Wells and Mitch Thompson
  * 
@@ -14,10 +13,10 @@ public class ContactApplication {
   protected static String currentDB;
   protected static String currentTable;
   protected static int defaultOrCurrent = 1;
-  
+
   public static ContactUI myUI;
-  
-  public static void main(String[] args){
+
+  public static void main(String[] args) {
     myUI = new ContactUI();
     myUI.createFrame();
     myUI.createLabels(1);

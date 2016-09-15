@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 /*
  * Copyright (c) 2016 Jake Wells and Mitch Thompson
  * 
@@ -26,7 +25,7 @@ public class SQLDatabaseConnector {
 
   }
 
-  //creates connection to sql database
+  // creates connection to sql database
   public static Connection connectToDatabase(String connString, String userName, String passWord) throws SQLException {
 
     Connection conn = null;
@@ -34,7 +33,7 @@ public class SQLDatabaseConnector {
     return conn;
   }
 
-  //displays the first contact in table to gui
+  // displays the first contact in table to gui
   public static void displayFirst(Connection conn) throws SQLException {
 
     Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -52,34 +51,34 @@ public class SQLDatabaseConnector {
 
   }
 
-  //deletes all contacts 
+  // deletes all contacts
   public static void deleteAllContacts(Connection conn) throws SQLException {
-    
+
     Statement stmt = conn.createStatement();
     stmt.executeUpdate("DELETE FROM CONTACT");
     stmt.close();
   }
 
-  //Creates new contact given the info in the contact object from the GUI 
+  // Creates new contact given the info in the contact object from the GUI
   public static void createNewContact(Connection conn, Contact contact) throws SQLException {
-    
+
     Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-    
+
     stmt.executeUpdate("INSERT INTO contact " + "(FirstName, MiddleName, LastName, Email, Major) " + "VALUES ("
         + contact.toString() + " )");
 
     stmt.close();
   }
 
-  //Deletes the current Contact from the GUI
+  // Deletes the current Contact from the GUI
   public static void deleteContact(Connection conn, Contact contact) throws SQLException {
-    
+
     Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
     boolean moved = displayNext(conn, contact);
-    if(moved){
+    if (moved) {
       stmt.executeUpdate("DELETE FROM contact " + "WHERE email = '" + contact.getEmail() + "'");
-    }else{
+    } else {
       displayPrevious(conn, contact);
       stmt.executeUpdate("DELETE FROM contact " + "WHERE email = '" + contact.getEmail() + "'");
     }
@@ -88,33 +87,34 @@ public class SQLDatabaseConnector {
 
   }
 
-  //Updates the current Contact from the GUI with all info in the GUI
+  // Updates the current Contact from the GUI with all info in the GUI
   public static void updateContact(Connection conn, Contact contact) throws SQLException {
     Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
     stmt.executeUpdate("UPDATE contact SET FirstName = '" + contact.getFirstName() + "', MiddleName = '"
         + contact.getMiddleName() + "', LastName = '" + contact.getLastName() + "', Email = '" + contact.getEmail()
-        + "', Major = '" + contact.getMajor() + "' WHERE FirstName = '" + contact.getFirstName()
-        + "' OR " + "LastName = '" + contact.getLastName() + "' OR " + "Email = '" + contact.getEmail() + "'");
+        + "', Major = '" + contact.getMajor() + "' WHERE FirstName = '" + contact.getFirstName() + "' OR "
+        + "LastName = '" + contact.getLastName() + "' OR " + "Email = '" + contact.getEmail() + "'");
 
     stmt.close();
   }
 
-  //Displays the next contact in the GUI provided there is a next contact in the table
+  // Displays the next contact in the GUI provided there is a next contact in
+  // the table
   public static boolean displayNext(Connection conn, Contact contact) throws SQLException {
     boolean moved = false;
     Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     ResultSet rs = stmt.executeQuery("SELECT * FROM contact");
     rs.next();
-    while(rs.getString(5).compareTo(myUI.fourthBox.getText()) != 0){
+    while (rs.getString(5).compareTo(myUI.fourthBox.getText()) != 0) {
       rs.next();
     }
-    if(rs.next()){
+    if (rs.next()) {
       rs.previous();
       rs.next();
       moved = true;
     }
-    if(rs.isAfterLast()){
+    if (rs.isAfterLast()) {
       rs.previous();
       moved = false;
     }
@@ -130,20 +130,21 @@ public class SQLDatabaseConnector {
     return moved;
   }
 
-  //Displays the previous contact in the GUI provided there is a next contact in the table
+  // Displays the previous contact in the GUI provided there is a next contact
+  // in the table
   public static void displayPrevious(Connection conn, Contact contact) throws SQLException {
-    
+
     Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     ResultSet rs = stmt.executeQuery("SELECT * FROM contact");
     rs.next();
-    while(rs.getString(5).compareTo(myUI.fourthBox.getText()) != 0){
+    while (rs.getString(5).compareTo(myUI.fourthBox.getText()) != 0) {
       rs.next();
     }
-    if(rs.previous()){
+    if (rs.previous()) {
       rs.next();
       rs.previous();
     }
-    if(rs.isBeforeFirst()){
+    if (rs.isBeforeFirst()) {
       rs.next();
     }
 

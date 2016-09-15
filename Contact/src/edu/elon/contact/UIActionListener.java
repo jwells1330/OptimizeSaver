@@ -44,7 +44,7 @@ public class UIActionListener implements ActionListener {
     } else if (e.getActionCommand().equals("Add")) {
 
       current = myUI.grabInputAsContact();
-      
+
       myUI.createTextBoxes(0);
       myUI.createButtons(3);
       myUI.displayUI();
@@ -60,7 +60,7 @@ public class UIActionListener implements ActionListener {
         myUI.thirdBox.setText(current.getLastName());
         myUI.fourthBox.setText(current.getEmail());
         myUI.fifthBox.setText(current.getMajor());
-        
+
       } catch (SQLException e1) {
         e1.printStackTrace();
       }
