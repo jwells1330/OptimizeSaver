@@ -142,7 +142,7 @@ public class SQLDatabaseConnector {
     rs.next();
     int current = rs.getInt(1);
     rs = stmt.executeQuery("SELECT * FROM contact");
-    if(current>10){
+    if(current>1){
       rs.absolute(current-1);
     }else{
       rs.next();
