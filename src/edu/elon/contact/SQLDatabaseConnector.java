@@ -28,11 +28,9 @@ public class SQLDatabaseConnector {
   }
 
   public static void displayFirst(Connection conn) throws SQLException {
-    Statement stmt = null;
-    ResultSet rs = null;
 
-    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-    rs = stmt.executeQuery("SELECT * FROM contact");
+    Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    ResultSet rs = stmt.executeQuery("SELECT * FROM contact");
     rs.next();
 
     myUI.firstBox.setText(rs.getString(2));
@@ -47,18 +45,15 @@ public class SQLDatabaseConnector {
   }
 
   public static void deleteAllContacts(Connection conn) throws SQLException {
-    Statement stmt = null;
-    stmt = conn.createStatement();
+    
+    Statement stmt = conn.createStatement();
     stmt.executeUpdate("DELETE FROM CONTACT");
     stmt.close();
   }
 
   public static void createNewContact(Connection conn, Contact contact) throws SQLException {
-    Statement stmt = null;
-    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     
-    System.out.println("INSERT INTO contact " + "(FirstName, MiddleName, LastName, Email, Major) " + "VALUES ("
-    + contact.toString() + " )");
+    Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     
     stmt.executeUpdate("INSERT INTO contact " + "(FirstName, MiddleName, LastName, Email, Major) " + "VALUES ("
         + contact.toString() + " )");
@@ -67,8 +62,8 @@ public class SQLDatabaseConnector {
   }
 
   public static void deleteContact(Connection conn, Contact contact) throws SQLException {
-    Statement stmt = null;
-    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    
+    Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
     boolean moved = displayNext(conn, contact);
     if(moved){
@@ -123,8 +118,8 @@ public class SQLDatabaseConnector {
   }
 
   public static void displayPrevious(Connection conn, Contact contact) throws SQLException {
-    Statement stmt = null;
-    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    
+    Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     ResultSet rs = stmt.executeQuery("SELECT * FROM contact");
     rs.next();
     while(rs.getString(5).compareTo(myUI.fourthBox.getText()) != 0){
