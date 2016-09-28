@@ -8,7 +8,7 @@ public class MinimumAbsoluteSum extends Function {
 	   * Default constructor to set initial input point to (0, 0)
 	   */
 	  public MinimumAbsoluteSum() {
-	    this(new double[] { -100, -80, -60, -40, -20, 20, 40, 60, 80, 100 });
+	    this(new double[] { -100, 100, -100, 100, -100, 100, -100, 100, -100, 100, -100, 100 });
 	  }
 	  
 	  /**

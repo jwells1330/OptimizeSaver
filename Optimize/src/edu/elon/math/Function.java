@@ -8,6 +8,8 @@
 package edu.elon.math;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Standard interface for consistency in the Elon evaluation process.
@@ -16,7 +18,7 @@ import java.util.ArrayList;
  * @author dpowell2
  * @version 1.0
  */
-public abstract class Function {
+public abstract class Function extends Observable {
 
   /**
    * constant to represent new line
@@ -48,6 +50,16 @@ public abstract class Function {
     // empty
   }
 
+  /**
+   * Called from the evaluate method.  Used to notify observers that 
+   * the output has changed so the GUI can update.
+   */
+  public void evaluated(){
+	  System.out.println("Test");
+	  setChanged();
+	  System.out.println(hasChanged());
+	  notifyObservers();
+  }
   /**
    * Evaluates the current set of input values to calculate the
    * function value. We currently consider one output value for a

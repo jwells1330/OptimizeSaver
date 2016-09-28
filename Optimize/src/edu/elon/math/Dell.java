@@ -101,6 +101,9 @@ public class Dell extends Function {
       lsq = lsq + Math.pow(cost[i] - x1 * Math.pow(quantity[i], y1), 2);
     }
     this.setOutput(new Double(lsq));
+    
+    evaluated();
+    
     return this.getOutput();
   }
 
